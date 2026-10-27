@@ -11,7 +11,7 @@
 export const site = {
   name: { first: "Isha", last: "Swaminathan" },
   initials: "IS",
-  url: "https://ishaswaminathan.com",
+  url: "https://www.ishaswaminathan.com", // must match the primary domain set in Vercel
   location: "Pittsburgh, PA · Dallas, TX",
   headline: "Where Data Meets Design, Strategy, and Innovation.",
   // Words in the headline that get the animated gradient treatment
