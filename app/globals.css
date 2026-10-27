@@ -58,9 +58,6 @@ body {
   color: var(--color-white);
 }
 
-/* Hide native cursor only when the custom cursor is active */
-html.has-cursor, html.has-cursor * { cursor: none !important; }
-
 :focus-visible {
   outline: 2px solid var(--color-cyan);
   outline-offset: 3px;

@@ -83,7 +83,7 @@ export default function Nav() {
                   <button
                     onClick={() => go(item.id)}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative rounded-full px-3.5 py-2 text-[13px] transition-colors ${
+                    className={`relative rounded-full px-3 py-2 text-[13px] transition-colors xl:px-3.5 ${
                       isActive ? "text-white" : "text-white/55 hover:text-white"
                     }`}
                   >
@@ -155,7 +155,7 @@ export default function Nav() {
                     onClick={() => go(item.id)}
                     className="flex w-full items-baseline gap-4 py-1.5 text-left text-[2.6rem] font-semibold leading-tight tracking-tight text-white"
                   >
-                    <span className="font-mono text-xs text-white/35">0{i + 1}</span>
+                    <span className="font-mono text-xs text-white/35">{item.index}</span>
                     {item.label}
                   </button>
                 </motion.li>

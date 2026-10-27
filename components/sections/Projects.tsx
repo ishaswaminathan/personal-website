@@ -174,7 +174,6 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-controls={panelId}
-            data-cursor={open ? "Close" : "Read more"}
             className="relative aspect-[16/10] overflow-hidden text-left md:aspect-auto md:min-h-[22rem]"
           >
             <span className="sr-only">{open ? "Hide" : "Show"} the {p.title} case study</span>
@@ -238,7 +237,6 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
                 target="_blank"
                 rel="noopener"
                 aria-label={p.link.label}
-                data-cursor="Visit"
                 className="group grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white text-ink shadow-[0_10px_30px_-12px_rgba(39,48,31,0.6)] transition-transform duration-500 hover:scale-110"
               >
                 <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:rotate-45" />
@@ -290,7 +288,6 @@ function Publications() {
             href={pub.href}
             target="_blank"
             rel="noopener"
-            data-cursor="Read"
             className="pcard glass ring-anim group relative flex flex-col justify-between gap-8 rounded-[1.75rem] p-7 sm:p-8"
           >
             {/* Folded-paper corner */}

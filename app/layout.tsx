@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Instrument_Serif, Jost } from "next/font/google";
 import "./globals.css";
 import { site, fullName, education, experience } from "@/content/site";
 import SmoothScroll from "@/components/ui/SmoothScroll";
-import Cursor from "@/components/ui/Cursor";
 import Nav from "@/components/ui/Nav";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
@@ -73,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <Nav />
         {children}
-        <Cursor />
         <div className="grain" aria-hidden />
       </body>
     </html>

@@ -507,14 +507,16 @@ export const education = {
   ],
 };
 
+// `index` matches the (0X) number shown at the top of each section
 export const nav = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Experience", id: "experience" },
-  { label: "Projects", id: "projects" },
-  { label: "Skills", id: "skills" },
-  { label: "Leadership", id: "leadership" },
-  { label: "Contact", id: "contact" },
+  { label: "Home", id: "home", index: "00" },
+  { label: "About", id: "about", index: "01" },
+  { label: "Experience", id: "experience", index: "02" },
+  { label: "Projects", id: "projects", index: "03" },
+  { label: "Skills", id: "skills", index: "05" },
+  { label: "Leadership", id: "leadership", index: "06" },
+  { label: "Education", id: "education", index: "07" },
+  { label: "Contact", id: "contact", index: "08" },
 ];
 
 export const fullName = `${site.name.first} ${site.name.last}`;

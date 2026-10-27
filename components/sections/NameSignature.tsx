@@ -65,58 +65,37 @@ function Badge() {
   );
 }
 
-/**
- * Signature moment: the name as cut-out paper letters. On scroll the tiles
- * fly in from scattered positions, settle into place, a warm light passes
- * through them, and the tagline appears.
- */
+/** Signature moment: the name as cut-out paper letters, with the tagline and LinkedIn badge. */
 export default function NameSignature() {
   const root = useRef<HTMLElement>(null);
 
+  // No pinning or fly-in: the name is simply there, and gently shrinks as you scroll past
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      const tiles = gsap.utils.toArray<HTMLElement>(".sig-name .cut-tile");
-
-      const build = (scrub: boolean | number, pin: boolean) => {
-        const tl = gsap.timeline({
-          scrollTrigger: scrub
-            ? { trigger: ".sig-stage", start: "top top", end: "+=160%", scrub, pin: true, anticipatePin: 1 }
-            : { trigger: ".sig-stage", start: "top 70%" },
-        });
-        tl.fromTo(".sig-line", { scaleX: 0 }, { scaleX: 1, duration: 1, ease: "power3.inOut" })
-          .fromTo(
-            tiles,
-            {
-              x: (i: number) => Number(tiles[i].dataset.x),
-              y: (i: number) => Number(tiles[i].dataset.y),
-              rotate: (i: number) => Number(tiles[i].dataset.r),
-              scale: 0.7,
-              opacity: 0,
-            },
-            { x: 0, y: 0, rotate: 0, scale: 1, opacity: 1, duration: 1.6, stagger: 0.06, ease: "back.out(1.4)" },
-            0.4,
-          )
-          .fromTo(".sig-glow", { xPercent: -120, opacity: 0 }, { xPercent: 220, opacity: 1, duration: 1.6, ease: "power1.inOut" }, 2.1)
-          .fromTo(".sig-sub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "expo.out" }, 2.6)
-          .fromTo(".sig-badge", { scale: 0, rotate: -90 }, { scale: 1, rotate: 0, duration: 0.9, ease: "back.out(1.6)" }, 2.5);
-        if (pin) tl.to(".sig-name", { scale: 0.92, yPercent: -5, duration: 1, ease: "none" }, "+=0.4");
-      };
-
-      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => build(1, true));
-      mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => build(false, false));
+      gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(
+          ".sig-name",
+          { scale: 1 },
+          {
+            scale: 0.8,
+            transformOrigin: "50% 50%",
+            ease: "none",
+            scrollTrigger: { trigger: ".sig-stage", start: "top 35%", end: "bottom top", scrub: true },
+          },
+        );
+      });
     }, root);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={root} id="signature" aria-label={`${fullName}: signature`} className="relative bg-ink">
-      <div className="sig-stage relative flex flex-col md:min-h-[100svh] justify-between overflow-clip">
+      <div className="sig-stage relative flex flex-col justify-between overflow-clip">
         <div className="absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
         <div className="orb left-1/4 top-1/3 h-[30rem] w-[30rem] bg-butter/40" />
         <Rule />
 
-        <div className="relative flex flex-1 flex-col justify-center px-4 py-10 sm:px-8 md:py-0">
+        <div className="relative flex flex-1 flex-col justify-center px-4 py-12 sm:px-8 md:py-20">
           <div className="sig-line mx-auto mb-10 h-[2px] w-full max-w-[96rem] origin-center rounded-full bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
           <h2 className="sig-name relative mx-auto w-full max-w-[96rem] select-none uppercase">
@@ -127,11 +106,6 @@ export default function NameSignature() {
             <span aria-hidden className="mt-[0.06em] block whitespace-nowrap text-right text-[clamp(1.5rem,7.3vw,9.5rem)]">
               <Cutout text={site.name.last} seed={11} animate="none" label={false} />
             </span>
-            {/* Warm light passing over the paper */}
-            <span
-              aria-hidden
-              className="sig-glow pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-butter/50 to-transparent opacity-0 mix-blend-soft-light blur-2xl"
-            />
           </h2>
 
           <div className="mx-auto mt-12 flex w-full max-w-[96rem] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
